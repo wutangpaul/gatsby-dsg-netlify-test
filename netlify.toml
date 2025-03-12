@@ -1,0 +1,46 @@
+[build]
+  command = "npm run build"
+  publish = "public"
+  functions = "netlify/functions"
+
+[build.processing]
+  skip_processing = true # Disables unnecessary post-processing
+
+[build.environment]
+  NODE_ENV = "production"
+  NODE_OPTIONS = "--max_old_space_size=8192"
+  NETLIFY_USE_YARN = "true" # Ensures Netlify uses Yarn if applicable
+  YARN_FLAGS = "--network-timeout 1000000 --no-progress" # Speeds up Yarn installs
+  NPM_FLAGS = "--prefer-offline --no-audit --progress=false" # Speeds up NPM installs
+  CI = "true" # Prevents unnecessary prompts
+  GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES = "true" # Enables incremental builds
+  GATSBY_EXPERIMENTAL_QUERY_ON_DEMAND = "true" # Optimizes queries
+  GATSBY_PARALLEL_QUERY_RUNNING = "true" # Runs queries in parallel for speed
+  GATSBY_CPU_COUNT = "4" # Limits CPU usage for efficiency
+  CACHE_VERSION = "1" # Forces Netlify to reuse cache effectively
+
+[functions]
+  node_bundler = "esbuild" # Faster function bundling
+
+[[plugins]]
+  package = "@netlify/plugin-gatsby" # Uses the official Netlify Gatsby plugin
+
+[context.production.environment]
+  GATSBY_CONCURRENT_DOWNLOAD = "10" # Speeds up remote asset downloads
+  GATSBY_DISABLE_CACHE_PURGE = "true" # Prevents unnecessary cache clearing
+  GATSBY_LOGGER = "json" # Less verbose logging speeds up builds
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[dev]
+  command = "gatsby develop"
+  targetPort = 8000
+  framework = "#auto"
