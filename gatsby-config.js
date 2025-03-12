@@ -8,9 +8,6 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 
-
-console.log(process.env)
-
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -19,16 +16,6 @@ module.exports = {
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
   plugins: [
-    `gatsby-plugin-image`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
-    },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
