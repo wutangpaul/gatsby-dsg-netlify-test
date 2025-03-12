@@ -7,6 +7,10 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+
+
+console.log(process.env)
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
