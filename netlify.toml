@@ -10,7 +10,7 @@
   NODE_ENV = "production"
   NODE_OPTIONS = "--max_old_space_size=8192"
   NETLIFY_USE_YARN = "true" # Ensures Netlify uses Yarn if applicable
-  YARN_FLAGS = "--network-timeout 1000000 --no-progress" # Speeds up Yarn installs
+  YARN_FLAGS = "--legacy-peer-deps --network-timeout 1000000 --no-progress" # Speeds up Yarn installs
   NPM_FLAGS = "--prefer-offline --no-audit --progress=false" # Speeds up NPM installs
   CI = "true" # Prevents unnecessary prompts
   GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES = "true" # Enables incremental builds
